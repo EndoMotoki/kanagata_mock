@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>kanagata</title>
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+
+    <!-- jQuery (DataTablesの依存ライブラリ) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- DataTables JavaScript -->
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            padding-top: 60px; /* ナビゲーションバーの高さ分だけ余白を確保 */
+        }
+
+        /* ナビゲーションバーのスタイル */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #333;
+            color: white;
+            padding: 10px 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* 左側のナビゲーションリンク */
+        .navbar-left {
+            display: flex;
+        }
+
+        .navbar-left a {
+            color: white;
+            text-decoration: none;
+            padding: 14px 20px;
+            display: inline-block;
+        }
+
+        .navbar-left a:hover {
+            background-color: #575757;
+        }
+
+        /* 右側のアカウントアイコン */
+        .navbar-right {
+            display: flex;
+            align-items: center;
+            padding-right: 20px;
+        }
+
+        .navbar-right .account-icon {
+            background-color: #444;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 18px;
+            margin-left: 20px;
+        }
+
+        .navbar-right .account-name {
+            margin-left: 10px;
+            color: white;
+        }
+
+        /* コンテンツ部分のスタイル */
+        .content {
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- ナビゲーションバー -->
+<div class="navbar">
+    <!-- 左側のナビゲーションリンク -->
+    <div class="navbar-left">
+        <a href="index.html">ホーム</a>
+        <a href="seisanInput.html">生産実績入力</a>
+        <a href="maintenance.html">金型メンテ実績入力</a>
+        <a href="table.html">グラフ</a>
+        <a href="input.html">データ変更</a>
+    </div>
+
+    <!-- 右側のアカウント情報 -->
+    <div class="navbar-right">
+        <div class="account-icon">A</div>
+        <div class="account-name">遠藤</div>
+    </div>
+</div>
+
+<!-- コンテンツ -->
+<div class="content">
+    <h1>生産累積ショットテーブル</h1>
+
+
+    <div class="table-container">
+        <table id="example" class="display">
+            <thead>
+            <tr>
+                <th>金型名</th>
+                <th>メンテナンスショット数</th>
+                <th>保証ショット数</th>
+                <th>量産開始日</th>
+                <th>製造元</th>
+                <th>生産可能設備</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>順送A</td>
+                <td>250000</td>
+                <td>300000</td>
+                <td>2025/01/20</td>
+                <td>社内</td>
+                <td>P6,P20,P12</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $('#example').DataTable({
+                "paging": true, // ページネーション有効
+                "searching": true, // 検索機能有効
+                "ordering": true, // 並べ替え機能有効
+                "info": true, // テーブル情報表示
+                "lengthChange": false // ページサイズ変更無効
+            });
+        });
+    </script>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>生産データ入力フォーム</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: inline-block;
+            width: 150px;
+            margin-bottom: 5px;
+        }
+        select, input {
+            width: 200px;
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+
+         body {
+             margin: 0;
+             font-family: Arial, sans-serif;
+             padding-top: 60px; /* ナビゲーションバーの高さ分だけ余白を確保 */
+         }
+
+        /* ナビゲーションバーのスタイル */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #333;
+            color: white;
+            padding: 10px 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* 左側のナビゲーションリンク */
+        .navbar-left {
+            display: flex;
+        }
+
+        .navbar-left a {
+            color: white;
+            text-decoration: none;
+            padding: 14px 20px;
+            display: inline-block;
+        }
+
+        .navbar-left a:hover {
+            background-color: #575757;
+        }
+
+        /* 右側のアカウントアイコン */
+        .navbar-right {
+            display: flex;
+            align-items: center;
+            padding-right: 20px;
+        }
+
+        .navbar-right .account-icon {
+            background-color: #444;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 18px;
+            margin-left: 20px;
+        }
+
+        .navbar-right .account-name {
+            margin-left: 10px;
+            color: white;
+        }
+
+        /* コンテンツ部分のスタイル */
+        .content {
+            padding: 20px;
+        }
+    </style>
+</head>
+<!-- ナビゲーションバー -->
+<div class="navbar">
+    <!-- 左側のナビゲーションリンク -->
+    <div class="navbar-left">
+        <a href="index.html">ホーム</a>
+        <a href="seisanInput.html">生産実績入力</a>
+        <a href="maintenance.html">金型メンテ実績入力</a>
+        <a href="table.html">グラフ</a>
+        <a href="input.html">データ変更</a>
+    </div>
+
+    <!-- 右側のアカウント情報 -->
+    <div class="navbar-right">
+        <div class="account-icon">A</div>
+        <div class="account-name">遠藤</div>
+    </div>
+</div>
+
+<body>
+<h2>生産データ入力フォーム</h2>
+<form id="productionForm">
+    <div class="form-group">
+        <label for="date">日付:</label>
+        <input type="date" id="date" name="date" required>
+    </div>
+
+    <div class="form-group">
+        <label for="client">客先名:</label>
+        <select id="client" name="client" required>
+            <option value="">選択してください</option>
+            <option value="client1">客先A</option>
+            <option value="client2">客先B</option>
+            <option value="client3">客先C</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="mold">金型名:</label>
+        <select id="mold" name="mold" required>
+            <option value="">選択してください</option>
+            <option value="mold1">金型A</option>
+            <option value="mold2">金型B</option>
+            <option value="mold3">金型C</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="product">製品名:</label>
+        <select id="product" name="product" required>
+            <option value="">選択してください</option>
+            <option value="product1">製品A</option>
+            <option value="product2">製品B</option>
+            <option value="product3">製品C</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="productNumber">製品番号:</label>
+        <select id="productNumber" name="productNumber" required>
+            <option value="">選択してください</option>
+            <option value="num1">001</option>
+            <option value="num2">002</option>
+            <option value="num3">003</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="maintenance">生産整備名:</label>
+        <select id="maintenance" name="maintenance" required>
+            <option value="">選択してください</option>
+            <option value="maint1">整備A</option>
+            <option value="maint2">整備B</option>
+            <option value="maint3">整備C</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="operator">作業者名:</label>
+        <select id="operator" name="operator" required>
+            <option value="">選択してください</option>
+            <option value="op1">作業者A</option>
+            <option value="op2">作業者B</option>
+            <option value="op3">作業者C</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="goodShots">良品生産ショット数:</label>
+        <input type="number" id="goodShots" name="goodShots" min="0" required onchange="calculateTotal()">
+    </div>
+
+    <div class="form-group">
+        <label for="badShots">不良生産ショット数:</label>
+        <input type="number" id="badShots" name="badShots" min="0" required onchange="calculateTotal()">
+    </div>
+
+    <div class="form-group">
+        <label for="testShots">捨て打ちショット数:</label>
+        <input type="number" id="testShots" name="testShots" min="0" required onchange="calculateTotal()">
+    </div>
+
+    <div class="form-group">
+        <label for="totalShots">ABC合計ショット数:</label>
+        <input type="number" id="totalShots" name="totalShots" readonly>
+    </div>
+
+    <button type="submit">登録</button>
+</form>
+
+<script>
+    function calculateTotal() {
+        const goodShots = parseInt(document.getElementById('goodShots').value) || 0;
+        const badShots = parseInt(document.getElementById('badShots').value) || 0;
+        const testShots = parseInt(document.getElementById('testShots').value) || 0;
+
+        const total = goodShots + badShots + testShots;
+        document.getElementById('totalShots').value = total;
+    }
+
+    document.getElementById('productionForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        alert('フォームが送信されました！');
+        // ここに実際の送信処理を追加
+    });
+</script>
+</body>
+</html>
