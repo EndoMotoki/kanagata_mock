@@ -127,6 +127,13 @@
 <div class="content">
     <h2>生産・メンテナンス データ分析</h2>
 
+    <div class="graph-box">
+        <canvas id="shotComparisonChart"></canvas>
+    </div>
+    <div class="graph-box">
+        <canvas id="maintenanceShotChart"></canvas>
+    </div>
+
     <div class="controls">
         <div class="control-group">
             <label>期間:</label>
@@ -286,6 +293,87 @@
         // 各グラフを更新する処理を実装
         // 実際のデータはAPIやデータベースから取得する
     }
+
+    const shotComparisonChart = new Chart(
+        document.getElementById('shotComparisonChart'),
+        {
+            type: 'bar',
+            data: {
+                labels: ['順送A', '順送B', '順送C'],
+                datasets: [
+                    {
+                        label: '保証ショット数',
+                        data: [100000, 120000, 90000],
+                        backgroundColor: 'rgb(54, 162, 235)'
+                    },
+                    {
+                        label: '累積ショット数',
+                        data: [80000, 95000, 70000],
+                        backgroundColor: 'rgb(255, 99, 132)'
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: '保証ショット数 vs 累積ショット数'
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'ショット数'
+                        }
+                    }
+                }
+            }
+        }
+    );
+
+    // メンテナンスショット比較グラフ
+    const maintenanceShotChart = new Chart(
+        document.getElementById('maintenanceShotChart'),
+        {
+            type: 'bar',
+            data: {
+                labels: ['順送A', '順送B', '順送C'],
+                datasets: [
+                    {
+                        label: '定期メンテショット数',
+                        data: [50000, 55000, 45000],
+                        backgroundColor: 'rgb(153, 102, 255)'
+                    },
+                    {
+                        label: 'メンテ後ショット数',
+                        data: [30000, 35000, 25000],
+                        backgroundColor: 'rgb(255, 205, 86)'
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: '定期メンテショット vs メンテ後ショット数'
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'ショット数'
+                        }
+                    }
+                }
+            }
+        }
+    );
 </script>
 </body>
 </html>
